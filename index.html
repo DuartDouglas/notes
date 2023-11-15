@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+   <meta charset="UTF-8">
+   <!-- Evitando o problema de zoom em dispositivos móveis ao abrir o teclado -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+   <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+   <link rel="stylesheet" href="/styles/style.css">
+   <title>Lista de Anotações</title>
+</head>
+
+<body>
+   <div id="mode" class="light">
+      <section>
+         <div class="header-buttons">
+            <button id="instructions">
+               <svg>
+                  <use xlink:href="assets/images/icons.svg#instructions" />
+               </svg>
+            </button>
+
+            <a id="logo" href="#">
+               <svg>
+                  <use xlink:href="assets/images/icons.svg#logo" />
+               </svg>
+            </a>
+
+            <button id="btnLightMode">
+               <svg>
+                  <use xlink:href="assets/images/icons.svg#lightMode" />
+               </svg>
+            </button>
+
+            <button id="btnDarkMode" class="show">
+               <svg>
+                  <use xlink:href="assets/images/icons.svg#darkMode" />
+               </svg>
+            </button>
+         </div>
+         <h3>Bom dia!</h3>
+         <h4>Lista de tarefas</h4>
+      </section>
+
+      <section id="notesContainer">
+         <ul id="listNotes"></ul>
+      </section>
+
+      <button id="btnNewNote">
+         <svg>
+            <use xlink:href="assets/images/icons.svg#addtask" />
+         </svg>
+      </button>
+
+      <div id="modalNewNote">
+         <form>
+            <input id="inputNote" type="text" placeholder="Nova" required />
+            <input type="submit" value="+">
+         </form>
+
+      </div>
+
+      <div id="modalEditNote">
+         <div class="modal-content">
+            <div class="header-modal">
+               <p>Editar nota</p>
+               <span class="close">&times;</span>
+            </div>
+            <div class="main-modal">
+               <form id="formModalEdit">
+                  <div class="noteEdit-container">
+                     <textarea id="noteEdit" rows="10" cols="35"></textarea>
+                  </div>
+                  <input id="saveEdit" type="submit" value="Salvar">
+               </form>
+            </div>
+         </div>
+         <div id="excluir">
+            <p>Excluir nota</p>
+         </div>
+      </div>
+
+   </div>
+
+
+   <script src="/scripts/script.js"></script>
+</body>
+
+</html>
