@@ -179,7 +179,7 @@ section h1 {
    align-items: center;
 }
 
-#modalInstructions .modal-body ul li span {
+#modalInstructions .modal-body ul li strong {
    font-weight: bold;
    font-size: 1.4rem;
    margin-right: 0.5rem;
