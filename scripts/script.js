@@ -1,3 +1,20 @@
+// Saudação 
+const greeting = document.getElementById('greeting');
+
+const viewGreeting = () => {
+   let newDate = new Date();
+   let currentTime = newDate.getHours();
+
+   if (currentTime >= 6 && currentTime < 12) {
+      greeting.textContent = "Bom dia!";
+   } else if (currentTime >= 12 && currentTime < 18) {
+      greeting.textContent = "Boa tarde!";
+   } else {
+      greeting.textContent = "Boa noite!";
+   }
+}
+viewGreeting();
+
 // Modo Claro e modo escuro
 const mode = document.getElementById('mode');
 //Aplica modo escuro
@@ -15,6 +32,18 @@ document.getElementById('btnLightMode').addEventListener('click', () => {
    btnDarkMode.classList.add('show');
    btnLightMode.classList.remove('show');
 })
+
+// Abre modal de instruções 
+const btnInstructions = document.getElementById('btnInstructions');
+const modalInstructions = document.getElementById('modalInstructions');
+const closeInstructions = document.getElementById('closeInstructions');
+btnInstructions.addEventListener('click', () => {
+   modalInstructions.classList.add('show');
+});
+
+closeInstructions.addEventListener('click', () => {
+   modalInstructions.classList.remove('show');
+});
 
 const btnNewNote = document.getElementById('btnNewNote');
 const modalNewNote = document.getElementById('modalNewNote');
@@ -55,26 +84,50 @@ const liMaker = (text) => {
    button.classList = "btnEdit";
    span.textContent = text;
 
+   // Cria o botão de exclusão
+   const deleteButton = document.createElement('button');
+   const deleteSvgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+   const deleteUseElement = document.createElementNS("http://www.w3.org/2000/svg", "use");
+   deleteUseElement.setAttributeNS("http://www.w3.org/1999/xlink", "href", "assets/images/icons.svg#btnDelete");
 
+   li.appendChild(deleteButton);
+   deleteButton.appendChild(deleteSvgElement);
+   deleteSvgElement.appendChild(deleteUseElement);
 
-   // clique no botão de edição - prompt 
-   /* button.addEventListener('click', () => {
-      const newText = prompt('Edit o texto: ', text);
-      if (newText !== null) {
-         text = newText;
-         span.textContent = text;
-         console.log("Passou 1 vez");
+   deleteButton.classList = "btnDelete";
+
+   deleteButton.addEventListener('click', () => {
+      const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+      confirmDeleteModal.classList.add('show');
+
+      const confirmYes = document.getElementById('confirmYes');
+      const confirmNo = document.getElementById('confirmNo');
+
+      
+      confirmYes.addEventListener('click', () => {
+         // Verifica se o elemento ainda é um filho antes de tentar removê-lo
+         if (li.parentNode) {
+            listNotes.removeChild(li);
+         }
          
-         updateText();
-      }
-   });  */
+         itemsArray = itemsArray.filter(item => item !== text);
+         localStorage.setItem('items', JSON.stringify(itemsArray));
+         
+         confirmDeleteModal.classList.remove('show');
+      });
+
+      
+      confirmNo.addEventListener('click', () => {
+         confirmDeleteModal.classList.remove('show');
+      });
+   });
 
    button.addEventListener('click', () => {
       const modalEditNote = document.getElementById('modalEditNote');
 
       const closeModal = document.getElementsByClassName('close')[0];
       const noteEdit = document.getElementById('noteEdit');
-      
+
       const formModalEdit = document.getElementById('formModalEdit');
 
       modalEditNote.classList.add('show');
@@ -85,15 +138,17 @@ const liMaker = (text) => {
       closeModal.addEventListener('click', () => {
          modalEditNote.classList.remove('show');
       })
-      
+
       formModalEdit.addEventListener('submit', () => {
          text = noteEdit.value;
          span.textContent = text;
          modalEditNote.classList.remove('show');
          updateText();
-      }) 
+      })
+
    });
-      
+
+
    checkbox.addEventListener('change', () => {
       let spanCheck = checkbox.nextElementSibling;
       if (checkbox.checked) {
@@ -106,11 +161,11 @@ const liMaker = (text) => {
 
 const updateText = () => {
    const spans = document.querySelectorAll('li > span');
-   itemsArray = []; 
+   itemsArray = [];
    spans.forEach((span) => {
       itemsArray.push(span.textContent);
    });
-   
+
    localStorage.setItem('items', JSON.stringify(itemsArray));
 }
 
@@ -119,7 +174,7 @@ form.addEventListener('submit', function (e) {
    // pega o que foi inserido no formulario e coloca no array
    itemsArray.push(item.value);
    localStorage.setItem('items', JSON.stringify(itemsArray));
-   
+
    liMaker(item.value);
    item.value = '';
    modalNewNote.classList.remove('show');
