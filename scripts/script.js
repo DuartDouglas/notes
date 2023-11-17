@@ -18,23 +18,39 @@ viewGreeting();
 // Modo Claro e modo escuro
 const mode = document.getElementById('mode');
 const body = document.querySelector('body');
+
+let currentMode = localStorage.getItem('modeColor') || 'light';
+
+const applyMode = () => {
+   if (currentMode === 'dark') {
+      mode.classList.add('dark');
+      mode.classList.remove('light');
+      btnDarkMode.classList.remove('show');
+      btnLightMode.classList.add('show');
+      body.style.backgroundColor = "#161616";
+   } else {
+      mode.classList.add('light');
+      mode.classList.remove('dark');
+      btnDarkMode.classList.add('show');
+      btnLightMode.classList.remove('show');
+      body.style.backgroundColor = "#eeeeee";
+   }
+}
+applyMode();
+
 //Aplica modo escuro
 document.getElementById('btnDarkMode').addEventListener('click', () => {
-   mode.classList.add('dark');
-   mode.classList.remove('light');
-   btnDarkMode.classList.remove('show');
-   btnLightMode.classList.add('show');
-   body.style.backgroundColor = "#161616";
-})
+   currentMode = 'dark';
+   applyMode();
+   localStorage.setItem('modeColor', currentMode);
+});
 
 //Aplica modo claro
 document.getElementById('btnLightMode').addEventListener('click', () => {
-   mode.classList.add('light');
-   mode.classList.remove('dark');
-   btnDarkMode.classList.add('show');
-   btnLightMode.classList.remove('show');
-   body.style.backgroundColor = "#eeeeee";
-})
+   currentMode = 'light';
+   applyMode();
+   localStorage.setItem('modeColor', currentMode);
+});
 
 // Abre modal de instruções 
 const btnInstructions = document.getElementById('btnInstructions');
@@ -87,6 +103,13 @@ const liMaker = (text) => {
    const useElement = document.createElementNS("http://www.w3.org/2000/svg", "use");
    useElement.setAttributeNS("http://www.w3.org/1999/xlink", "href", "assets/images/icons.svg#menuEdit");
 
+   // Verifica se há um estado no checkbox salvo no localStorage para este item
+   const savedState = localStorage.getItem(`item_${text}`);
+   if (savedState === 'checked') {
+      checkbox.checked = true;
+      span.classList.add('completed');
+   }
+
    listNotes.appendChild(li);
    li.appendChild(checkbox);
    li.appendChild(span);
@@ -124,7 +147,9 @@ const liMaker = (text) => {
          }
 
          itemsArray = itemsArray.filter(item => item !== text);
-         localStorage.setItem('items', JSON.stringify(itemsArray));
+         localStorage.setItem('items', JSON.stringify(itemsArray));   
+         // exclui item salvo no localStorage para checkbox
+         localStorage.removeItem(`item_${text}`);
 
          confirmDeleteModal.classList.remove('show');
       });
@@ -167,15 +192,18 @@ const liMaker = (text) => {
       });
    });
 
-
    checkbox.addEventListener('change', () => {
       let spanCheck = checkbox.nextElementSibling;
       if (checkbox.checked) {
          spanCheck.classList.add('completed');
+         // Salva o estado como 'checked' no localStorage
+         localStorage.setItem(`item_${text}`, 'checked');
       } else {
          spanCheck.classList.remove('completed');
+         // Remove o estado do localStorage
+         localStorage.removeItem(`item_${text}`);
       }
-   })
+   });
 }
 
 const updateText = () => {
