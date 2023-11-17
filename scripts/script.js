@@ -58,10 +58,12 @@ const modalInstructions = document.getElementById('modalInstructions');
 const closeInstructions = document.getElementById('closeInstructions');
 btnInstructions.addEventListener('click', () => {
    modalInstructions.classList.add('show');
+   body.style.overflow = 'hidden';
 });
 
 closeInstructions.addEventListener('click', () => {
    modalInstructions.classList.remove('show');
+   body.style.overflow = 'auto';
 });
 
 const btnNewNote = document.getElementById('btnNewNote');
