@@ -22,6 +22,10 @@ button:hover {
    cursor: pointer;
 }
 
+body {
+   background-color: #eeeeee;
+}
+
 #mode {
    padding-block: 1rem 5rem;
    min-height: 100vh;
