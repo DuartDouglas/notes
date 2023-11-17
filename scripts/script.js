@@ -17,12 +17,14 @@ viewGreeting();
 
 // Modo Claro e modo escuro
 const mode = document.getElementById('mode');
+const body = document.querySelector('body');
 //Aplica modo escuro
 document.getElementById('btnDarkMode').addEventListener('click', () => {
    mode.classList.add('dark');
    mode.classList.remove('light');
    btnDarkMode.classList.remove('show');
    btnLightMode.classList.add('show');
+   body.style.backgroundColor = "#161616";
 })
 
 //Aplica modo claro
@@ -31,6 +33,7 @@ document.getElementById('btnLightMode').addEventListener('click', () => {
    mode.classList.remove('dark');
    btnDarkMode.classList.add('show');
    btnLightMode.classList.remove('show');
+   body.style.backgroundColor = "#eeeeee";
 })
 
 // Abre modal de instruções 
@@ -51,10 +54,20 @@ const listNotes = document.getElementById('listNotes');
 const form = document.querySelector('form');
 const item = document.getElementById('inputNote');
 
-
 btnNewNote.addEventListener('click', () => {
    modalNewNote.classList.add('show');
-})
+});
+
+//fecha modal nova tarefa se o usuário clicar fora dele
+const header = document.getElementById('header');
+const notesContainer = document.getElementById('notesContainer');
+header.addEventListener('click', () => {
+   modalNewNote.classList.remove('show');
+});
+
+notesContainer.addEventListener('click', () => {
+   modalNewNote.classList.remove('show');
+});
 
 let items;
 
@@ -103,20 +116,20 @@ const liMaker = (text) => {
       const confirmYes = document.getElementById('confirmYes');
       const confirmNo = document.getElementById('confirmNo');
 
-      
+
       confirmYes.addEventListener('click', () => {
          // Verifica se o elemento ainda é um filho antes de tentar removê-lo
          if (li.parentNode) {
             listNotes.removeChild(li);
          }
-         
+
          itemsArray = itemsArray.filter(item => item !== text);
          localStorage.setItem('items', JSON.stringify(itemsArray));
-         
+
          confirmDeleteModal.classList.remove('show');
       });
 
-      
+
       confirmNo.addEventListener('click', () => {
          confirmDeleteModal.classList.remove('show');
       });
@@ -146,6 +159,12 @@ const liMaker = (text) => {
          updateText();
       })
 
+      //fecha o modal de edição se o usuário clicar fora dele
+      window.addEventListener('click', function (event) {
+         if (event.target == modalEditNote) {
+            modalEditNote.classList.remove('show');
+         }
+      });
    });
 
 
@@ -180,9 +199,6 @@ form.addEventListener('submit', function (e) {
    modalNewNote.classList.remove('show');
 });
 
-
 data.forEach((item) => {
    liMaker(item);
 });
-
-

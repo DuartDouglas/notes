@@ -13,7 +13,7 @@
 
 <body>
    <div id="mode" class="light">
-      <section>
+      <section id="header">
          <div class="header-buttons">
             <button id="btnInstructions">
                <svg>
@@ -47,11 +47,15 @@
          <ul id="listNotes"></ul>
       </section>
 
-      <button id="btnNewNote">
-         <svg>
-            <use xlink:href="assets/images/icons.svg#addtask" />
-         </svg>
-      </button>
+      <div class="newNote-container">
+         <div class="container">
+            <button id="btnNewNote">
+               <svg>
+                  <use xlink:href="assets/images/icons.svg#addtask" />
+               </svg>
+            </button>
+         </div>
+      </div>
 
       <div id="modalInstructions">
          <div class="modal-content">
@@ -60,53 +64,64 @@
             </div>
             <div class="modal-body">
                <h3>Olá! seja bem vindo ao meu projeto de Lista de tarefas</h3>
-               <p>Desenvolvi esse projeto para estudos sobre programação web ulizando a linguagem JavaScript.</p>
-               <p>Se você é um usuário que apenas quer utlizar a lista de tarefas fique a vontade ela é 100% funcional e
-                  gratuita</p>
-               <p>Se você é um programador ou está estudando pode ter acesso ao meu código fonte disponível no meu <a
-                     href="https://github.com/DuartDouglas/notes">repositório público no GitHub</a></p>
-               <h5>Instruções de utilização</h5>
+               <p>Desenvolvi esse projeto para estudos sobre programação web ulizando a linguagem JavaScript. Para nós
+                  programadores sempre que iniciamos nossos estudos o primeiro passo é fazermos o famoso CRUD (Create,
+                  Read, Update, Delete), criar, ler, atualizar e deletar, que são as quatro operações básicas do
+                  desenvolvimento de uma aplicação.</p>
+               <p>Esse projeto não tem conexão com um banco de dados pois eu queria que ele ficasse disponível para
+                  qualquer usuário sem a necessidade de instalação e obviamente de forma gratuita.</p>
+               <p>Optei por utlizar o localStorage para manter os dados salvos mesmo quanto o usuário saia do navegador.
+               </p>
+               <p>Se você é um usuário que apenas quer utilizar a lista de tarefas fique a vontade ela é 100% funcional
+                  e gratuita.</p>
+               <p>Se você é um programador ou está estudando e ficou interessado no projeto pode ter acesso ao meu código fonte disponível no meu <a
+                     href="https://github.com/DuartDouglas/notes">repositório público no GitHub.</a></p>
+               <h5>Instruções de uso</h5>
                <ul>
                   <li>
                      <strong>-</strong>
                      <svg>
-                        <use xlink:href="assets/images/icons.svg#addtask" />
+                        <use xlink:href="assets/images/icons.svg#logo" />
                      </svg>
-                     Instruções de uso
+                     Logo do App.
+                  </li>
+                  <li>
+                     <strong>-</strong>
+                     <svg>
+                        <use xlink:href="assets/images/icons.svg#instructions" />
+                     </svg>
+                     Instruções de uso.
                   </li>
                   <li>
                      <strong>-</strong>
                      <svg>
                         <use xlink:href="assets/images/icons.svg#darkMode" />
                      </svg>
-                     Você pode alternar entre o modo escuro e claro
+                     <svg>
+                        <use xlink:href="assets/images/icons.svg#lightMode" />
+                     </svg>
+                     Você pode alternar entre o modo escuro e claro.
                   </li>
                   <li>
                      <strong>-</strong>
                      <svg>
                         <use xlink:href="assets/images/icons.svg#menuEdit" />
                      </svg>
-                     Botão para editar uma tarefa existente
-                  </li>
-                  <li>
-                     <strong>-</strong>
-                     <svg>
-                        <use xlink:href="assets/images/icons.svg#logo" />
-                     </svg>
-                     Apenas a logo do App
+                     Botão para editar uma tarefa existente.
                   </li>
                   <li>
                      <strong>-</strong>
                      <svg>
                         <use xlink:href="assets/images/icons.svg#addtask" />
                      </svg>
-                     Adicione uma nova tarefa</li>
+                     Adicione uma nova tarefa.
+                  </li>
                   <li>
                      <strong>-</strong>
                      <svg>
                         <use xlink:href="assets/images/icons.svg#btnDelete" />
                      </svg>
-                     Excluir uma nota existente. Você sempre será perguntado se deseja excluir a tarefa
+                     Excluir uma nota existente. Você sempre será perguntado se deseja excluir a tarefa.
                   </li>
                </ul>
             </div>
