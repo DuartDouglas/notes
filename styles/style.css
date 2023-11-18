@@ -420,6 +420,7 @@ section h1 {
    border: 1px solid #39393986;
    border-radius: 0.8rem;
    flex-grow: 1;
+   font-size: 0.9rem;
 }
 
 #modalNewNote #inputNote:focus {
